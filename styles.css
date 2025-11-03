@@ -1,0 +1,120 @@
+/* Fugo Innovation - Main Stylesheet */
+
+body {
+    box-sizing: border-box;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.float-animation {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Card Hover Effect */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* Visibility Controls */
+.admin-hidden {
+    display: none !important;
+}
+
+.public-hidden {
+    display: none !important;
+}
+
+/* Brand Logo */
+.brand-logo {
+    height: 40px;
+    width: 40px;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+/* Tech Images Scrolling Strip (Right-to-Left) */
+.tech-scroll-container {
+    overflow: hidden;
+    width: 100%;
+    margin: 2rem 0;
+    position: relative;
+}
+
+.tech-scroll-track {
+    display: flex;
+    width: 200%; /* two sets of images for seamless loop */
+    animation: scroll-rtl 25s linear infinite;
+}
+
+.tech-scroll-track:hover {
+    animation-play-state: paused;
+}
+
+.tech-scroll-slide {
+    flex: 0 0 10%; /* 5 images per set = 10% each (200% / 20) */
+    padding: 0 0.5rem;
+}
+
+.tech-scroll-slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.tech-scroll-slide img:hover {
+    transform: scale(1.05);
+}
+
+@media (min-width: 768px) {
+    .tech-scroll-slide img { 
+        height: 280px; 
+    }
+}
+
+@media (min-width: 1024px) {
+    .tech-scroll-slide img { 
+        height: 350px; 
+    }
+}
+
+@keyframes scroll-rtl {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+    

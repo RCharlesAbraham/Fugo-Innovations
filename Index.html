@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fugo Innovation Pvt Limited - IT Services & Product Development</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="display: none;">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">Admin Login</h2>
+            <form id="adminLoginForm">
+                <div class="mb-4">
+                    <label for="adminUsername" class="block text-sm font-semibold mb-2">Username</label>
+                    <input type="text" id="adminUsername" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                </div>
+                <div class="mb-6">
+                    <label for="adminPassword" class="block text-sm font-semibold mb-2">Password</label>
+                    <input type="password" id="adminPassword" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                </div>
+                <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">Login</button>
+                <button type="button" id="closeLoginModal" class="w-full mt-3 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition">Cancel</button>
+                <div id="loginError" class="mt-4 text-red-600 text-center hidden"></div>
+            </form>
+            <div class="mt-4 text-sm text-gray-600 text-center">
+                Demo credentials: admin / admin123
+            </div>
+        </div>
+    </div>
+
+    <!-- Public Site Navigation -->
+    <nav id="publicNav" class="bg-white shadow-lg fixed w-full top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="Images/logo.png" alt="Fugo Innovation logo" class="brand-logo" />
+                    <span class="text-2xl font-bold gradient-text">Fugo Innovation</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-purple-600 transition">Home</a>
+                    <a href="#services" class="text-gray-700 hover:text-purple-600 transition">Services</a>
+                    <a href="#technologies" class="text-gray-700 hover:text-purple-600 transition">Technologies</a>
+                    <a href="#products" class="text-gray-700 hover:text-purple-600 transition">Products</a>
+                    <a href="#contact" class="text-gray-700 hover:text-purple-600 transition">Contact</a>
+                    <button id="adminLoginBtn" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Admin</button>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-3 space-y-3">
+                <a href="#home" class="block text-gray-700 hover:text-purple-600">Home</a>
+                <a href="#services" class="block text-gray-700 hover:text-purple-600">Services</a>
+                <a href="#technologies" class="block text-gray-700 hover:text-purple-600">Technologies</a>
+                <a href="#products" class="block text-gray-700 hover:text-purple-600">Products</a>
+                <a href="#contact" class="block text-gray-700 hover:text-purple-600">Contact</a>
+                <button id="mobileAdminBtn" class="block w-full text-left bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">Admin Login</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Public Site Content -->
+    <div id="publicContent">
+        <!-- Hero Section -->
+        <section id="home" class="pt-24 pb-20 bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="fade-in-up">
+                        <h1 class="text-5xl md:text-6xl font-bold mb-6">Innovating the Future of Technology</h1>
+                        <p class="text-xl mb-8 text-purple-100">Leading IT services and product development company specializing in cutting-edge technologies</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#contact" class="bg-white text-purple-700 px-8 py-3 rounded-lg font-semibold hover:bg-purple-50 transition">Get Started</a>
+                            <a href="#services" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-purple-700 transition">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="float-animation">
+                       <img src="Images/BG1.jpg" alt="Hero Image" class="w-full h-auto rounded-lg shadow-lg" /> 
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+                    <p class="text-xl text-gray-600">Comprehensive IT solutions tailored to your needs</p>
+                </div>
+                <div id="servicesGrid" class="grid md:grid-cols-3 gap-8">
+                    <!-- Services will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Technologies Section -->
+        <section id="technologies" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Technologies We Use</h2>
+                    <p class="text-xl text-gray-600">Staying ahead with cutting-edge technology stack</p>
+                </div>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">⚛️</div>
+                        <h4 class="font-bold text-gray-900">React & Next.js</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">🟢</div>
+                        <h4 class="font-bold text-gray-900">Node.js</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">🐍</div>
+                        <h4 class="font-bold text-gray-900">Python & Django</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">☁️</div>
+                        <h4 class="font-bold text-gray-900">AWS & Azure</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">🐳</div>
+                        <h4 class="font-bold text-gray-900">Docker & Kubernetes</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">🧠</div>
+                        <h4 class="font-bold text-gray-900">TensorFlow & PyTorch</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">📊</div>
+                        <h4 class="font-bold text-gray-900">GraphQL</h4>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center card-hover">
+                        <div class="text-3xl mb-3">🔗</div>
+                        <h4 class="font-bold text-gray-900">Blockchain</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="py-20 bg-white relative" style="background-image: url('Images/B1.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+            <div class="absolute inset-0 bg-white bg-opacity-90"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Products</h2>
+                    <p class="text-xl text-gray-600">Innovative solutions designed for modern businesses</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gradient-to-br from-purple-100 to-indigo-100 p-8 rounded-xl card-hover">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">🚀 Enterprise Management Suite</h3>
+                        <p class="text-gray-700 mb-4">Complete ERP solution with modules for HR, Finance, Inventory, and CRM integrated into one powerful platform.</p>
+                        <button class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">Learn More</button>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-100 to-cyan-100 p-8 rounded-xl card-hover">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">📊 Analytics Dashboard Pro</h3>
+                        <p class="text-gray-700 mb-4">Real-time business intelligence and analytics platform with AI-powered insights and predictive modeling.</p>
+                        <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-gradient-to-br from-purple-600 to-indigo-700 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl font-bold mb-4">Get In Touch</h2>
+                    <p class="text-xl text-purple-100">Let's discuss how we can help transform your business</p>
+                </div>
+                <form id="contactForm" class="bg-white rounded-xl p-8 text-gray-900">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-sm font-semibold mb-2">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="company" class="block text-sm font-semibold mb-2">Company</label>
+                        <input type="text" id="company" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message" class="block text-sm font-semibold mb-2">Message</label>
+                        <textarea id="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">Send Message</button>
+                    <div id="formMessage" class="mt-4 text-center hidden"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 gradient-text">Fugo Innovation</h3>
+                        <p class="text-gray-400">Leading IT services and product development company</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Services</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#services" class="hover:text-white transition">Software Development</a></li>
+                            <li><a href="#services" class="hover:text-white transition">Cloud Solutions</a></li>
+                            <li><a href="#services" class="hover:text-white transition">Mobile Apps</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Company</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#home" class="hover:text-white transition">About Us</a></li>
+                            <li><a href="#products" class="hover:text-white transition">Products</a></li>
+                            <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-4">Connect</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition text-2xl">📧</a>
+                            <a href="#" class="text-gray-400 hover:text-white transition text-2xl">💼</a>
+                            <a href="#" class="text-gray-400 hover:text-white transition text-2xl">🐦</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                    <p>&copy; 2024 Fugo Innovation Pvt Limited. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="public.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996173f6d2c27f8a',t:'MTc2MTcyODExNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
+        <div id="adminDashboard" class="admin-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+                
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-blue-600 mr-4">📊</div>
+                            <div>
+                                <p class="text-sm text-gray-600">Total Inquiries</p>
+                                <p class="text-2xl font-bold text-gray-900" id="totalInquiries">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-green-600 mr-4">✅</div>
+                            <div>
+                                <p class="text-sm text-gray-600">Active Services</p>
+                                <p class="text-2xl font-bold text-gray-900" id="activeServices">6</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-purple-600 mr-4">👥</div>
+                            <div>
+                                <p class="text-sm text-gray-600">New This Month</p>
+                                <p class="text-2xl font-bold text-gray-900" id="newThisMonth">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-orange-600 mr-4">🚀</div>
+                            <div>
+                                <p class="text-sm text-gray-600">Projects</p>
+                                <p class="text-2xl font-bold text-gray-900">12</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Inquiries</h3>
+                        <div id="recentInquiries" class="space-y-3">
+                            <p class="text-gray-600">No inquiries yet</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="admin-nav-btn w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition" data-section="services">Manage Services</button>
+                            <button class="admin-nav-btn w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition" data-section="inquiries">View All Inquiries</button>
+                            <button class="admin-nav-btn w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition" data-section="analytics">View Analytics</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Management Section -->
+        <div id="adminServices" class="admin-section admin-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900">Manage Services</h1>
+                    <button id="addServiceBtn" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">Add New Service</button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="servicesTable" class="bg-white divide-y divide-gray-200">
+                                <!-- Services will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inquiries Section -->
+        <div id="adminInquiries" class="admin-section admin-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">Customer Inquiries</h1>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inquiriesTable" class="bg-white divide-y divide-gray-200">
+                                <!-- Inquiries will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="adminAnalytics" class="admin-section admin-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">Analytics</h1>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Inquiry Trends</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">This Week</span>
+                                <span class="font-bold text-green-600" id="weeklyInquiries">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">This Month</span>
+                                <span class="font-bold text-blue-600" id="monthlyInquiries">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Total</span>
+                                <span class="font-bold text-purple-600" id="totalInquiriesAnalytics">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Popular Services</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Custom Software Development</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-sm">45%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Cloud Solutions</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">30%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Mobile App Development</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">25%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Service Modal -->
+    <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="display: none;">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <h2 id="serviceModalTitle" class="text-2xl font-bold text-gray-900 mb-6">Add New Service</h2>
+            <form id="serviceForm">
+                <div class="mb-4">
+                    <label for="serviceName" class="block text-sm font-semibold mb-2">Service Name</label>
+                    <input type="text" id="serviceName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                </div>
+                <div class="mb-4">
+                    <label for="serviceIcon" class="block text-sm font-semibold mb-2">Icon (Emoji)</label>
+                    <input type="text" id="serviceIcon" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" placeholder="💻" required>
+                </div>
+                <div class="mb-6">
+                    <label for="serviceDescription" class="block text-sm font-semibold mb-2">Description</label>
+                    <textarea id="serviceDescription" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required></textarea>
+                </div>
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">Save Service</button>
+                    <button type="button" id="closeServiceModal" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Inquiry Modal -->
+    <div id="inquiryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="display: none;">
+        <div class="bg-white rounded-xl p-8 max-w-2xl w-full mx-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Inquiry Details</h2>
+            <div id="inquiryDetails" class="space-y-4">
+                <!-- Inquiry details will be populated by JavaScript -->
+            </div>
+            <div class="flex gap-4 mt-6">
+                <button id="markAsReadBtn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Mark as Read</button>
+                <button id="closeInquiryModal" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'996173f6d2c27f8a',t:'MTc2MTcyODExNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

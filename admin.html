@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fugo Innovation - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-100">
+    <!-- Admin Navigation -->
+    <nav class="bg-gray-900 text-white shadow-lg fixed w-full top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-purple-400">Fugo Admin</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <button class="admin-nav-btn text-gray-300 hover:text-white transition" data-section="dashboard">Dashboard</button>
+                    <button class="admin-nav-btn text-gray-300 hover:text-white transition" data-section="services">Services</button>
+                    <button class="admin-nav-btn text-gray-300 hover:text-white transition" data-section="inquiries">Inquiries</button>
+                    <button class="admin-nav-btn text-gray-300 hover:text-white transition" data-section="analytics">Analytics</button>
+                    <a href="index.html" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard Content -->
+    <div class="pt-20 min-h-screen">
+        <!-- Dashboard Section -->
+        <div id="adminDashboard" class="admin-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+                
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-blue-600 mr-4">📊</div>
+                            <div>
+                                <p class="text-sm text-gray-600">Total Inquiries</p>
+                                <p class="text-2xl font-bold text-gray-900" id="totalInquiries">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-green-600 mr-4">✅</div>
+                            <div>
+                                <p class="text-sm text-gray-600">Active Services</p>
+                                <p class="text-2xl font-bold text-gray-900" id="activeServices">6</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-purple-600 mr-4">👥</div>
+                            <div>
+                                <p class="text-sm text-gray-600">New This Month</p>
+                                <p class="text-2xl font-bold text-gray-900" id="newThisMonth">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <div class="text-3xl text-orange-600 mr-4">🚀</div>
+                            <div>
+                                <p class="text-sm text-gray-600">Projects</p>
+                                <p class="text-2xl font-bold text-gray-900">12</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Recent Inquiries</h3>
+                        <div id="recentInquiries" class="space-y-3">
+                            <p class="text-gray-600">No inquiries yet</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Quick Actions</h3>
+                        <div class="space-y-3">
+                            <button class="admin-nav-btn w-full bg-purple-600 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition" data-section="services">Manage Services</button>
+                            <button class="admin-nav-btn w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition" data-section="inquiries">View All Inquiries</button>
+                            <button class="admin-nav-btn w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 transition" data-section="analytics">View Analytics</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Management Section -->
+        <div id="adminServices" class="admin-section admin-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900">Manage Services</h1>
+                    <button id="addServiceBtn" class="bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition">Add New Service</button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="servicesTable" class="bg-white divide-y divide-gray-200">
+                                <!-- Services will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inquiries Section -->
+        <div id="adminInquiries" class="admin-section admin-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">Customer Inquiries</h1>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inquiriesTable" class="bg-white divide-y divide-gray-200">
+                                <!-- Inquiries will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="adminAnalytics" class="admin-section admin-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-8">Analytics</h1>
+                
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Inquiry Trends</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">This Week</span>
+                                <span class="font-bold text-green-600" id="weeklyInquiries">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">This Month</span>
+                                <span class="font-bold text-blue-600" id="monthlyInquiries">0</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Total</span>
+                                <span class="font-bold text-purple-600" id="totalInquiriesAnalytics">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Popular Services</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Custom Software Development</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full text-sm">45%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Cloud Solutions</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm">30%</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600">Mobile App Development</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-sm">25%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Service Modal -->
+    <div id="serviceModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="display: none;">
+        <div class="bg-white rounded-xl p-8 max-w-md w-full mx-4">
+            <h2 id="serviceModalTitle" class="text-2xl font-bold text-gray-900 mb-6">Add New Service</h2>
+            <form id="serviceForm">
+                <div class="mb-4">
+                    <label for="serviceName" class="block text-sm font-semibold mb-2">Service Name</label>
+                    <input type="text" id="serviceName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+                </div>
+                <div class="mb-4">
+                    <label for="serviceIcon" class="block text-sm font-semibold mb-2">Icon (Emoji)</label>
+                    <input type="text" id="serviceIcon" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" placeholder="💻" required>
+                </div>
+                <div class="mb-6">
+                    <label for="serviceDescription" class="block text-sm font-semibold mb-2">Description</label>
+                    <textarea id="serviceDescription" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600" required></textarea>
+                </div>
+                <div class="flex gap-4">
+                    <button type="submit" class="flex-1 bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition">Save Service</button>
+                    <button type="button" id="closeServiceModal" class="flex-1 bg-gray-300 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-400 transition">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Inquiry Modal -->
+    <div id="inquiryModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="display: none;">
+        <div class="bg-white rounded-xl p-8 max-w-2xl w-full mx-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Inquiry Details</h2>
+            <div id="inquiryDetails" class="space-y-4">
+                <!-- Inquiry details will be populated by JavaScript -->
+            </div>
+            <div class="flex gap-4 mt-6">
+                <button id="markAsReadBtn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">Mark as Read</button>
+                <button id="closeInquiryModal" class="bg-gray-300 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-400 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
