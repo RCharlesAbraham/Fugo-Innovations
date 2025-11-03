@@ -97,15 +97,22 @@ function setupEventListeners() {
             showAdminSection(section);
         });
     });
+    // Service management (guard elements because admin.js is included on multiple pages)
+    const addServiceBtn = document.getElementById('addServiceBtn');
+    if (addServiceBtn) addServiceBtn.addEventListener('click', () => showServiceModal());
 
-    // Service management
-    document.getElementById('addServiceBtn').addEventListener('click', () => showServiceModal());
-    document.getElementById('serviceForm').addEventListener('submit', handleServiceSubmit);
-    document.getElementById('closeServiceModal').addEventListener('click', hideServiceModal);
+    const serviceForm = document.getElementById('serviceForm');
+    if (serviceForm) serviceForm.addEventListener('submit', handleServiceSubmit);
+
+    const closeServiceModalBtn = document.getElementById('closeServiceModal');
+    if (closeServiceModalBtn) closeServiceModalBtn.addEventListener('click', hideServiceModal);
 
     // Inquiry modal
-    document.getElementById('closeInquiryModal').addEventListener('click', hideInquiryModal);
-    document.getElementById('markAsReadBtn').addEventListener('click', markInquiryAsRead);
+    const closeInquiryModalBtn = document.getElementById('closeInquiryModal');
+    if (closeInquiryModalBtn) closeInquiryModalBtn.addEventListener('click', hideInquiryModal);
+
+    const markAsReadBtn = document.getElementById('markAsReadBtn');
+    if (markAsReadBtn) markAsReadBtn.addEventListener('click', markInquiryAsRead);
 }
 
 // View Management
@@ -123,6 +130,7 @@ function showAdminSection(section) {
 // Services Management
 function renderServicesTable() {
     const servicesTable = document.getElementById('servicesTable');
+    if (!servicesTable) return;
     servicesTable.innerHTML = services.map(service => `
         <tr>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -216,6 +224,7 @@ function toggleServiceStatus(id) {
 // Inquiries Management
 function renderInquiriesTable() {
     const inquiriesTable = document.getElementById('inquiriesTable');
+    if (!inquiriesTable) return;
     if (inquiries.length === 0) {
         inquiriesTable.innerHTML = `
             <tr>
@@ -255,6 +264,7 @@ function viewInquiry(id) {
     currentViewingInquiry = inquiries.find(i => i.id === id);
     const modal = document.getElementById('inquiryModal');
     const details = document.getElementById('inquiryDetails');
+    if (!modal || !details || !currentViewingInquiry) return;
 
     details.innerHTML = `
         <div class="grid md:grid-cols-2 gap-4">
@@ -285,7 +295,8 @@ function viewInquiry(id) {
 }
 
 function hideInquiryModal() {
-    document.getElementById('inquiryModal').style.display = 'none';
+    const modal = document.getElementById('inquiryModal');
+    if (modal) modal.style.display = 'none';
     currentViewingInquiry = null;
 }
 
@@ -301,30 +312,39 @@ function markInquiryAsRead() {
 
 // Dashboard and Analytics
 function updateDashboardStats() {
-    document.getElementById('totalInquiries').textContent = inquiries.length;
-    document.getElementById('activeServices').textContent = services.filter(s => s.status === 'active').length;
-    document.getElementById('newThisMonth').textContent = inquiries.filter(i => {
-        const inquiryDate = new Date(i.date);
-        const now = new Date();
-        return inquiryDate.getMonth() === now.getMonth() && inquiryDate.getFullYear() === now.getFullYear();
-    }).length;
+    const totalEl = document.getElementById('totalInquiries');
+    if (totalEl) totalEl.textContent = inquiries.length;
+
+    const activeEl = document.getElementById('activeServices');
+    if (activeEl) activeEl.textContent = services.filter(s => s.status === 'active').length;
+
+    const newThisMonthEl = document.getElementById('newThisMonth');
+    if (newThisMonthEl) {
+        newThisMonthEl.textContent = inquiries.filter(i => {
+            const inquiryDate = new Date(i.date);
+            const now = new Date();
+            return inquiryDate.getMonth() === now.getMonth() && inquiryDate.getFullYear() === now.getFullYear();
+        }).length;
+    }
 
     // Update recent inquiries
     const recentInquiries = document.getElementById('recentInquiries');
-    if (inquiries.length === 0) {
-        recentInquiries.innerHTML = '<p class="text-gray-600">No inquiries yet</p>';
-    } else {
-        recentInquiries.innerHTML = inquiries.slice(0, 3).map(inquiry => `
-            <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                <div>
-                    <p class="font-medium text-gray-900">${inquiry.name}</p>
-                    <p class="text-sm text-gray-600">${inquiry.email}</p>
+    if (recentInquiries) {
+        if (inquiries.length === 0) {
+            recentInquiries.innerHTML = '<p class="text-gray-600">No inquiries yet</p>';
+        } else {
+            recentInquiries.innerHTML = inquiries.slice(0, 3).map(inquiry => `
+                <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <div>
+                        <p class="font-medium text-gray-900">${inquiry.name}</p>
+                        <p class="text-sm text-gray-600">${inquiry.email}</p>
+                    </div>
+                    <span class="px-2 py-1 text-xs rounded-full ${inquiry.status === 'read' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                        ${inquiry.status}
+                    </span>
                 </div>
-                <span class="px-2 py-1 text-xs rounded-full ${inquiry.status === 'read' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
-                    ${inquiry.status}
-                </span>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 }
 
@@ -336,9 +356,12 @@ function updateAnalytics() {
     const weeklyCount = inquiries.filter(i => new Date(i.date) >= weekAgo).length;
     const monthlyCount = inquiries.filter(i => new Date(i.date) >= monthAgo).length;
 
-    document.getElementById('weeklyInquiries').textContent = weeklyCount;
-    document.getElementById('monthlyInquiries').textContent = monthlyCount;
-    document.getElementById('totalInquiriesAnalytics').textContent = inquiries.length;
+    const weeklyEl = document.getElementById('weeklyInquiries');
+    if (weeklyEl) weeklyEl.textContent = weeklyCount;
+    const monthlyEl = document.getElementById('monthlyInquiries');
+    if (monthlyEl) monthlyEl.textContent = monthlyCount;
+    const totalAnalyticsEl = document.getElementById('totalInquiriesAnalytics');
+    if (totalAnalyticsEl) totalAnalyticsEl.textContent = inquiries.length;
 }
 
 // Initialize the application when DOM is loaded
