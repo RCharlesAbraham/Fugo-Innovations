@@ -1,0 +1,31 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "api/*.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "**/*.html",
+            "use": "@vercel/static"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/chatbot/click_logger.php",
+            "dest": "/api/click_logger"
+        },
+        {
+            "src": "/chatbot/chat_proxy.php",
+            "dest": "/api/chat_proxy"
+        },
+        {
+            "src": "/Chat%20bot%20Integration/chat_proxy.php",
+            "dest": "/api/chat_proxy"
+        },
+        {
+            "src": "/Chat bot Integration/chat_proxy.php",
+            "dest": "/api/chat_proxy"
+        }
+    ]
+}
